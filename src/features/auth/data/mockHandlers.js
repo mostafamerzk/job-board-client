@@ -1,5 +1,5 @@
 import { http, HttpResponse } from 'msw'
-import { mockLoginResponse, mockRegisterResponse } from './authFixtures.js'
+import { mockUser, mockLoginResponse, mockRegisterResponse } from './authFixtures.js'
 
 export const authHandlers = [
   http.post('*/api/v1/login', async ({ request }) => {
@@ -26,5 +26,9 @@ export const authHandlers = [
 
   http.post('*/api/v1/logout', () => {
     return HttpResponse.json({ message: 'Logged out successfully' })
+  }),
+
+  http.get('*/api/v1/me', () => {
+    return HttpResponse.json({ data: mockUser })
   }),
 ]
