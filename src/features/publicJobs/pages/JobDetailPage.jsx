@@ -23,7 +23,7 @@ function formatSalary(min, max, currency) {
 
 export function JobDetailPage() {
   const { id } = useParams()
-  const { isAuthenticated } = useAuth()
+  const { isAuthenticated, user } = useAuth()
   const navigate = useNavigate()
   const [job, setJob] = useState(null)
   const [isLoading, setIsLoading] = useState(true)
@@ -172,13 +172,15 @@ export function JobDetailPage() {
                 </>
               )}
 
-              <Button
-                variant="primary"
-                className="w-100"
-                onClick={handleApply}
-              >
-                Apply now
-              </Button>
+              {(!isAuthenticated || user?.role === 'candidate') && (
+                <Button
+                  variant="primary"
+                  className="w-100"
+                  onClick={handleApply}
+                >
+                  Apply now
+                </Button>
+              )}
             </Card.Body>
           </Card>
         </Col>
