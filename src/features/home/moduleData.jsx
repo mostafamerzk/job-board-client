@@ -1,9 +1,4 @@
-import {
-  Building2,
-  Search,
-  UserRound,
-  UsersRound,
-} from 'lucide-react'
+import { Building2, Search, UserRound, UsersRound } from 'lucide-react'
 
 export const moduleCards = [
   {
