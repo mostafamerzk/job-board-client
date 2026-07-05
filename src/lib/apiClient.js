@@ -48,9 +48,11 @@ async function request(method, path, options = {}) {
   }
 
   if (!res.ok) {
-    if (res.status === 401) {
+    if (res.status === 401 && path !== '/login' && path !== '/register') {
       try { localStorage.removeItem('auth_token') } catch {}
-      window.location.href = '/login'
+      if (window.location.pathname !== '/login' && window.location.pathname !== '/register') {
+        window.location.href = '/login'
+      }
       throw new ApiError(res.status, data, 'Session expired. Please log in again.')
     }
     throw new ApiError(res.status, data, res.statusText)
