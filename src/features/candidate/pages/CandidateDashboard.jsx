@@ -1,4 +1,3 @@
-import Badge from 'react-bootstrap/Badge'
 import Col from 'react-bootstrap/Col'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
@@ -15,37 +14,12 @@ import {
   jobMatches,
   applicationDraft,
   applications,
-  candidateEndpoints,
 } from '../candidateData.js'
 
 export function CandidateDashboard() {
   return (
     <section className="candidate-band" id="candidate-module" aria-labelledby="candidate-module-title">
       <Container>
-        <Row className="g-4 align-items-start">
-          <Col lg={4}>
-            <div className="section-heading sticky-heading">
-              <Badge bg="success" className="eyebrow">Phase 03</Badge>
-              <h2 id="candidate-module-title">Candidate module</h2>
-              <p>
-                Candidate-owned screens for profile readiness, resumes, approved job search,
-                application submission, and status history.
-              </p>
-            </div>
-          </Col>
-          <Col lg={8}>
-            <div className="endpoint-strip" aria-label="Candidate API endpoints">
-              {candidateEndpoints.map((endpoint) => (
-                <div key={`${endpoint.method}-${endpoint.path}`}>
-                  <span>{endpoint.method}</span>
-                  <strong>{endpoint.label}</strong>
-                  <code>{endpoint.path}</code>
-                </div>
-              ))}
-            </div>
-          </Col>
-        </Row>
-
         <Row className="g-4 mt-1">
           <Col lg={5}>
             <ProfilePanel profile={candidateProfile} />
