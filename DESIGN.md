@@ -111,6 +111,13 @@ All spacing derives from 4px.
 - States: active tab uses green text and elevated surface.
 - Accessibility: Bootstrap manages tab semantics.
 
+### Candidate Operations Panel
+
+- Structure: standalone Bootstrap `Card` panels for profile, resumes, search, application composer, and history.
+- States: green primary actions, bordered secondary actions, semantic status badges.
+- Spacing: 28px desktop panel padding, 20px mobile panel padding, 16px minimum internal grid gap.
+- Accessibility: every form control has a visible label; tables use real `thead` and `tbody`.
+
 ## 6. Motion & Interaction
 
 ### Timing

@@ -10,6 +10,7 @@ import Tabs from 'react-bootstrap/Tabs'
 import { ArrowRight, BriefcaseBusiness, CheckCircle2, FileText, Search, ShieldCheck } from 'lucide-react'
 import { AppShell } from '../components/layout/AppShell.jsx'
 import { StatusPill } from '../components/ui/StatusPill.jsx'
+import { CandidateModule } from '../features/candidate/CandidateModule.jsx'
 import { moduleCards, phasePlan, qualityChecks, workspaceTabs } from '../features/home/moduleData.jsx'
 
 function App() {
@@ -139,6 +140,8 @@ function App() {
             </Row>
           </Container>
         </section>
+
+        <CandidateModule />
 
         <section className="section-band muted">
           <Container>
