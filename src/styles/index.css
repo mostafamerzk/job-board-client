@@ -337,7 +337,7 @@ a {
 }
 
 .candidate-band {
-  padding: 72px 0;
+  padding: 12px 0;
   border-top: 1px solid var(--border-default);
   background: rgba(255, 250, 240, 0.76);
 }
@@ -758,8 +758,7 @@ a {
 @media (max-width: 575px) {
   .hero-band,
   .section-band,
-  .workspace-band,
-  .candidate-band {
+  .workspace-band {
     padding: 44px 0;
   }
 
