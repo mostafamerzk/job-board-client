@@ -1,8 +1,8 @@
-# Job Board Client Design System
+# WazeefaMasr Design System
 
 ## 1. Atmosphere & Identity
 
-Job Board Client should feel like a focused hiring operations desk: organized, quick to scan, and reliable under repeated daily use. The signature is grounded contrast: warm paper surfaces, dark ink text, and green action states that signal progress without using blue.
+WazeefaMasr should feel like a focused hiring operations desk: organized, quick to scan, and reliable under repeated daily use. The signature is grounded contrast: warm paper surfaces, dark ink text, and green action states that signal progress without using blue.
 
 ## 2. Color
 
@@ -111,6 +111,13 @@ All spacing derives from 4px.
 - States: active tab uses green text and elevated surface.
 - Accessibility: Bootstrap manages tab semantics.
 
+### Candidate Operations Panel
+
+- Structure: standalone Bootstrap `Card` panels for profile, resumes, search, application composer, and history.
+- States: green primary actions, bordered secondary actions, semantic status badges.
+- Spacing: 28px desktop panel padding, 20px mobile panel padding, 16px minimum internal grid gap.
+- Accessibility: panel titles use real headings, every form control has a visible label, and tables use real `thead` and `tbody`.
+
 ## 6. Motion & Interaction
 
 ### Timing
@@ -142,3 +149,80 @@ Mixed tonal-shift plus restrained borders.
 - Cards use 8px radius maximum.
 - Shadows are rare and warm-tinted.
 - Section bands provide depth before extra borders.
+
+---
+
+## 8. Architecture
+
+### Module Structure
+
+```
+src/
+├── app/              App composition, provider wiring
+├── shared/           Reusable layout, UI, hooks (cross-feature)
+├── features/         Domain modules, each with pages/ + components/ + api/ + data/
+├── routes/           Route definitions with auth/role guards
+├── context/          React Context providers (AuthContext)
+├── hooks/            Global shared hooks (useAuth)
+├── lib/              API client, route config, core utilities
+├── styles/           Global CSS + design tokens
+```
+
+### Data Flow
+
+```
+User Action → Component (page)
+                ↓
+            Feature API function (future)
+                ↓
+            apiClient (auth + base URL)
+                ↓
+            Backend /api/v1/*
+                ↓
+            Response → apiClient parses JSON / throws ApiError
+                ↓
+            Component renders data / error / loading state
+```
+
+### Auth Flow
+
+```
+Login/Register → apiClient POST → Token received
+                                         ↓
+                                  Stored in localStorage('auth_token')
+                                         ↓
+                                  AuthContext updates user + token
+                                         ↓
+                                  ProtectedRoute checks isAuthenticated
+                                         ↓
+                                  RoleGuard checks user.role
+                                         ↓
+                                  Route renders or redirects
+On 401 → apiClient clears token → redirects to /login
+```
+
+### Route Design Philosophy
+
+- **Flat routes** (not nested) — easier to reason about, no layout inheritance complexity
+- **Public** — `/`, `/login`, `/register`, `/jobs`, `/jobs/:id`
+- **Protected + role-gated** — `/candidate/*`, `/employer/*`, `/admin/*`
+- **Guards wrap the route element** — ProtectedRoute outer, RoleGuard inner, so unauthenticated users get redirected before they hit the role check
+
+### State Management Approach
+
+- **Auth state** — React Context (AuthContext)
+- **Page-level data** — component-local state with `useState` + `useEffect`
+- **No global store** — no Redux, Zustand, or React Query (add when cross-feature caching needs arise)
+- **API calls** — raw fetch via `apiClient` (thin wrapper, easy to swap for React Query later)
+
+### Key Dependencies
+
+| Library | Purpose |
+|---------|---------|
+| React 19 | UI framework |
+| react-router-dom v7 | Client-side routing |
+| react-bootstrap + bootstrap 5 | UI components + grid |
+| lucide-react | Icons (SVG, no emoji replacements) |
+| Vite 8 | Build tool |
+| oxlint | Linting |
+

@@ -1,5 +1,5 @@
 {
-  "name": "job-board-client",
+  "name": "wazeefamasr",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -15,7 +15,8 @@
     "lucide-react": "^1.23.0",
     "react": "^19.2.7",
     "react-bootstrap": "^2.10.10",
-    "react-dom": "^19.2.7"
+    "react-dom": "^19.2.7",
+    "react-router-dom": "^7.18.1"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^6.0.3",
