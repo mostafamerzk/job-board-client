@@ -24,8 +24,14 @@ Use this plan to divide work across team members without merge conflicts.
 | --- | --- | --- |
 | Candidate profile | Candidate profile form and display | `/candidate/profile` |
 | Resume manager | Upload, list, primary resume, delete | `/candidate/resumes` |
-| Applications | Apply, withdraw, history, status display | `/jobs/{job}/apply`, `/candidate/applications` |
+| Applications | Apply, withdraw, history, status display | `POST /candidate/applications`, `/candidate/applications/{application}/withdraw` |
 | Public search | Approved job list, filters, detail page | `/jobs`, `/categories`, `/technologies` |
+
+### Phase 3 Frontend Slice
+
+- `src/features/candidate/candidateData.js` owns static endpoint maps, filter presets, and sample API-shaped records until the API client is added.
+- `src/features/candidate/CandidateModule.jsx` owns the candidate workspace UI: profile readiness, resume manager, public job search, application composer, and application history.
+- Keep employer application review in the employer folder when Phase 2 screens grow; candidate screens should only show the candidate-owned side of the lifecycle.
 
 ## Phase 4: Admin
 

@@ -16,6 +16,7 @@ job-board-client/
 │   │   ├── layout/
 │   │   └── ui/
 │   ├── features/
+│   │   ├── candidate/
 │   │   └── home/
 │   ├── lib/
 │   │   └── apiConfig.js
@@ -45,15 +46,22 @@ Future feature folders should follow the backend modules:
 ```text
 src/features/
 ├── auth/
-├── public-jobs/
-├── employer/
 ├── candidate/
+├── employer/
+├── public-jobs/
 ├── applications/
 ├── comments/
 └── admin/
 ```
 
 Each feature may contain `components/`, `pages/`, `api/`, and `fixtures/` only after those files exist. Do not pre-create empty folders.
+
+## Current Feature Folders
+
+| Feature | Files | Purpose |
+| --- | --- | --- |
+| `src/features/home` | `moduleData.jsx` | Landing/product map data for team orientation |
+| `src/features/candidate` | `candidateData.js`, `CandidateModule.jsx` | Phase 3 candidate profile, resumes, public search, and applications workspace |
 
 ## API Boundary
 

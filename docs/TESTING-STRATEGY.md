@@ -48,6 +48,8 @@ Every feature should cover:
 - Resume upload type and size errors
 - Public search filters and empty results
 - Candidate apply and withdraw flows
+- Browser smoke: `Candidate module` heading, `Resume manager`, `Job search`, and `Application history` render at 375px, 768px, and 1280px.
+- Contract check: endpoint labels match `GET/PUT /candidate/profile`, `GET/POST/DELETE /candidate/resumes`, `GET /jobs`, `POST /candidate/applications`, and `PUT /candidate/applications/{application}/withdraw`.
 
 ### Phase 4
 
