@@ -1,0 +1,28 @@
+{
+  "name": "job-board-client",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "oxlint",
+    "preview": "vite preview",
+    "doctor": "npx react-doctor@latest --json"
+  },
+  "dependencies": {
+    "bootstrap": "^5.3.8",
+    "lucide-react": "^1.23.0",
+    "react": "^19.2.7",
+    "react-bootstrap": "^2.10.10",
+    "react-dom": "^19.2.7"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^6.0.3",
+    "oxlint": "^1.71.0",
+    "playwright-core": "^1.61.1",
+    "react-grab": "^0.1.48",
+    "react-scan": "^0.5.7",
+    "vite": "^8.1.1"
+  }
+}
