@@ -116,7 +116,7 @@ All spacing derives from 4px.
 - Structure: standalone Bootstrap `Card` panels for profile, resumes, search, application composer, and history.
 - States: green primary actions, bordered secondary actions, semantic status badges.
 - Spacing: 28px desktop panel padding, 20px mobile panel padding, 16px minimum internal grid gap.
-- Accessibility: every form control has a visible label; tables use real `thead` and `tbody`.
+- Accessibility: panel titles use real headings, every form control has a visible label, and tables use real `thead` and `tbody`.
 
 ## 6. Motion & Interaction
 

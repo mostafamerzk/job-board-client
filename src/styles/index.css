@@ -146,6 +146,12 @@ a {
   font-weight: 800;
 }
 
+.panel-header h3 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 800;
+}
+
 .metric-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -371,6 +377,7 @@ a {
 .candidate-table code {
   color: var(--text-secondary);
   font-size: 0.8rem;
+  overflow-wrap: anywhere;
   white-space: normal;
 }
 
@@ -434,6 +441,7 @@ a {
 .job-match,
 .application-draft div {
   display: flex;
+  min-width: 0;
   gap: 12px;
   align-items: center;
   padding: 14px;
@@ -455,6 +463,7 @@ a {
 .resume-item strong,
 .resume-item span {
   display: block;
+  overflow-wrap: anywhere;
 }
 
 .resume-item span,
@@ -542,5 +551,41 @@ a {
   .resume-item {
     align-items: stretch;
     flex-direction: column;
+  }
+
+  .candidate-table,
+  .candidate-table thead,
+  .candidate-table tbody,
+  .candidate-table tr,
+  .candidate-table th,
+  .candidate-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .candidate-table thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+
+  .candidate-table tr {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border-default);
+  }
+
+  .candidate-table td {
+    display: grid;
+    grid-template-columns: minmax(96px, 38%) minmax(0, 1fr);
+    gap: 12px;
+    border-bottom: 0;
+    overflow-wrap: anywhere;
+  }
+
+  .candidate-table td::before {
+    content: attr(data-label);
+    color: var(--text-secondary);
+    font-weight: 800;
   }
 }

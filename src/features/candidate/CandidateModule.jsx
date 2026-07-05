@@ -217,15 +217,15 @@ export function CandidateModule() {
               <tbody>
                 {applications.map((application) => (
                   <tr key={application.id}>
-                    <td>{application.jobTitle}</td>
-                    <td>{application.company}</td>
-                    <td>
+                    <td data-label="Job">{application.jobTitle}</td>
+                    <td data-label="Company">{application.company}</td>
+                    <td data-label="Status">
                       <Badge bg={applicationStatusVariants[application.status]}>
                         {application.status}
                       </Badge>
                     </td>
-                    <td>{application.createdAt}</td>
-                    <td>
+                    <td data-label="Created">{application.createdAt}</td>
+                    <td data-label="Candidate action">
                       <code>{application.action}</code>
                     </td>
                   </tr>
@@ -243,7 +243,7 @@ function PanelTitle({ icon, title }) {
   return (
     <div className="panel-header">
       {icon}
-      <span>{title}</span>
+      <h3>{title}</h3>
     </div>
   )
 }
