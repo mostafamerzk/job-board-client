@@ -1,20 +1,36 @@
+import { useSearchParams } from 'react-router-dom'
 import Container from 'react-bootstrap/Container'
-import Card from 'react-bootstrap/Card'
-import Alert from 'react-bootstrap/Alert'
+import Tab from 'react-bootstrap/Tab'
+import Tabs from 'react-bootstrap/Tabs'
+import { JobModeration } from '../components/JobModeration.jsx'
+import { UserManagement } from '../components/UserManagement.jsx'
+import { CommentModeration } from '../components/CommentModeration.jsx'
+
+const VALID_TABS = ['jobs', 'users', 'comments']
+const DEFAULT_TAB = 'jobs'
 
 export function AdminDashboard() {
+  const [searchParams, setSearchParams] = useSearchParams()
+  const rawTab = searchParams.get('tab')
+  const activeKey = VALID_TABS.includes(rawTab) ? rawTab : DEFAULT_TAB
+
+  function handleSelect(tab) {
+    setSearchParams({ tab })
+  }
+
   return (
-    <Container className="py-5">
-      <Card>
-        <Card.Body className="p-4">
-          <Card.Title>Admin console</Card.Title>
-          <Alert variant="info" className="mt-3">
-            Job moderation, user management, and comment moderation — coming soon.
-            <br />
-            See <code>docs/MODULE-ADMIN.md</code> for the implementation guide.
-          </Alert>
-        </Card.Body>
-      </Card>
+    <Container className="py-4">
+      <Tabs activeKey={activeKey} onSelect={handleSelect} className="mb-4">
+        <Tab eventKey="jobs" title="Jobs">
+          <JobModeration />
+        </Tab>
+        <Tab eventKey="users" title="Users">
+          <UserManagement />
+        </Tab>
+        <Tab eventKey="comments" title="Comments">
+          <CommentModeration />
+        </Tab>
+      </Tabs>
     </Container>
   )
 }
