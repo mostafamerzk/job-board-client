@@ -189,9 +189,11 @@ export function JobForm({ initialData, onSubmit, isSubmitting }) {
           rows={4}
           value={form.description}
           onChange={(e) => handleChange('description', e.target.value)}
+          isInvalid={!!errors.description}
           disabled={isSubmitting}
           placeholder="Describe the role and what the candidate will be working on…"
         />
+        <Form.Control.Feedback type="invalid">{errors.description}</Form.Control.Feedback>
       </Form.Group>
 
       <Row>
@@ -203,9 +205,11 @@ export function JobForm({ initialData, onSubmit, isSubmitting }) {
               rows={3}
               value={form.responsibilities}
               onChange={(e) => handleChange('responsibilities', e.target.value)}
+              isInvalid={!!errors.responsibilities}
               disabled={isSubmitting}
               placeholder="List key responsibilities…"
             />
+            <Form.Control.Feedback type="invalid">{errors.responsibilities}</Form.Control.Feedback>
           </Form.Group>
         </Col>
         <Col md={6}>
@@ -216,9 +220,11 @@ export function JobForm({ initialData, onSubmit, isSubmitting }) {
               rows={3}
               value={form.requirements}
               onChange={(e) => handleChange('requirements', e.target.value)}
+              isInvalid={!!errors.requirements}
               disabled={isSubmitting}
               placeholder="List required skills and experience…"
             />
+            <Form.Control.Feedback type="invalid">{errors.requirements}</Form.Control.Feedback>
           </Form.Group>
         </Col>
       </Row>
@@ -230,9 +236,11 @@ export function JobForm({ initialData, onSubmit, isSubmitting }) {
           rows={2}
           value={form.benefits}
           onChange={(e) => handleChange('benefits', e.target.value)}
+          isInvalid={!!errors.benefits}
           disabled={isSubmitting}
           placeholder="e.g. Remote work, health insurance, equity"
         />
+        <Form.Control.Feedback type="invalid">{errors.benefits}</Form.Control.Feedback>
       </Form.Group>
 
       <Row>
@@ -290,9 +298,11 @@ export function JobForm({ initialData, onSubmit, isSubmitting }) {
             <Form.Control
               value={form.location}
               onChange={(e) => handleChange('location', e.target.value)}
+              isInvalid={!!errors.location}
               disabled={isSubmitting}
               placeholder="e.g. Cairo, Egypt or Remote"
             />
+            <Form.Control.Feedback type="invalid">{errors.location}</Form.Control.Feedback>
           </Form.Group>
         </Col>
         <Col md={6}>
@@ -317,12 +327,14 @@ export function JobForm({ initialData, onSubmit, isSubmitting }) {
             <Form.Select
               value={form.work_type}
               onChange={(e) => handleChange('work_type', e.target.value)}
+              isInvalid={!!errors.work_type}
               disabled={isSubmitting}
             >
               {WORK_TYPES.map((wt) => (
                 <option key={wt.value} value={wt.value}>{wt.label}</option>
               ))}
             </Form.Select>
+            <Form.Control.Feedback type="invalid">{errors.work_type}</Form.Control.Feedback>
           </Form.Group>
         </Col>
         <Col md={4}>
@@ -331,12 +343,14 @@ export function JobForm({ initialData, onSubmit, isSubmitting }) {
             <Form.Select
               value={form.experience_level}
               onChange={(e) => handleChange('experience_level', e.target.value)}
+              isInvalid={!!errors.experience_level}
               disabled={isSubmitting}
             >
               {EXPERIENCE_LEVELS.map((el) => (
                 <option key={el.value} value={el.value}>{el.label}</option>
               ))}
             </Form.Select>
+            <Form.Control.Feedback type="invalid">{errors.experience_level}</Form.Control.Feedback>
           </Form.Group>
         </Col>
         <Col md={4}>
@@ -345,6 +359,7 @@ export function JobForm({ initialData, onSubmit, isSubmitting }) {
             <Form.Select
               value={form.category_id}
               onChange={(e) => handleChange('category_id', e.target.value)}
+              isInvalid={!!errors.category_id}
               disabled={isSubmitting}
             >
               <option value="">Select category</option>
@@ -352,6 +367,7 @@ export function JobForm({ initialData, onSubmit, isSubmitting }) {
                 <option key={cat.id} value={cat.id}>{cat.name}</option>
               ))}
             </Form.Select>
+            <Form.Control.Feedback type="invalid">{errors.category_id}</Form.Control.Feedback>
           </Form.Group>
         </Col>
       </Row>
@@ -372,6 +388,9 @@ export function JobForm({ initialData, onSubmit, isSubmitting }) {
               />
             ))}
           </div>
+          {errors.technologies && (
+            <div className="text-danger small mt-1">{errors.technologies}</div>
+          )}
         </Form.Group>
       )}
 

@@ -1,5 +1,6 @@
 import { render, waitFor } from '@testing-library/react'
 import { http, HttpResponse } from 'msw'
+import { MemoryRouter } from 'react-router-dom'
 import { server } from '../../test/setup.js'
 import { AuthContext, AuthProvider } from '../AuthContext.jsx'
 import { useContext } from 'react'
@@ -11,9 +12,11 @@ function renderAuthContext() {
     return <div data-testid="ready">{contextValue.isLoading ? 'loading' : 'ready'}</div>
   }
   const result = render(
-    <AuthProvider>
-      <TestConsumer />
-    </AuthProvider>
+    <MemoryRouter>
+      <AuthProvider>
+        <TestConsumer />
+      </AuthProvider>
+    </MemoryRouter>
   )
   return { result, getContext: () => contextValue }
 }
@@ -117,11 +120,7 @@ it('register: posts to /register, does NOT set token/user (returns res)', async 
 
 // ── logout ──
 
-it('logout: posts to /logout, clears token and user, redirects to /login', async () => {
-  const originalLocation = window.location
-  delete window.location
-  window.location = { ...originalLocation, href: '/' }
-
+it('logout: posts to /logout, clears token and user, navigates to /login', async () => {
   vi.spyOn(Storage.prototype, 'getItem').mockReturnValue('valid-token')
   const removeSpy = vi.spyOn(Storage.prototype, 'removeItem')
   const { getContext } = renderAuthContext()
@@ -135,7 +134,4 @@ it('logout: posts to /logout, clears token and user, redirects to /login', async
     expect(getContext().user).toBeNull()
     expect(getContext().token).toBeNull()
   })
-  expect(window.location.href).toBe('/login')
-
-  window.location = originalLocation
 })

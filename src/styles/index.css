@@ -89,6 +89,7 @@ a {
 
 .hero-copy {
   max-width: 680px;
+  margin-top: 1rem;
   color: var(--text-secondary);
   font-size: 1.125rem;
   line-height: 1.7;

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { useParams, Link, useNavigate } from 'react-router-dom'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
@@ -70,26 +70,27 @@ export function JobDetailPage() {
   const [notFound, setNotFound] = useState(false)
   const [error, setError] = useState(null)
 
-  useEffect(() => {
-    async function fetchJob() {
-      setIsLoading(true)
-      setError(null)
-      setNotFound(false)
-      try {
-        const res = await apiClient.get(`/jobs/${id}`)
-        setJob(res.data)
-      } catch (err) {
-        if (err.status === 404) {
-          setNotFound(true)
-        } else {
-          setError('Unable to load job details. Please try again.')
-        }
-      } finally {
-        setIsLoading(false)
+  const fetchJob = useCallback(async () => {
+    setIsLoading(true)
+    setError(null)
+    setNotFound(false)
+    try {
+      const res = await apiClient.get(`/jobs/${id}`)
+      setJob(res.data)
+    } catch (err) {
+      if (err.status === 404) {
+        setNotFound(true)
+      } else {
+        setError('Unable to load job details. Please try again.')
       }
+    } finally {
+      setIsLoading(false)
     }
-    fetchJob()
   }, [id])
+
+  useEffect(() => {
+    fetchJob()
+  }, [fetchJob])
 
   if (isLoading) {
     return (
@@ -116,7 +117,7 @@ export function JobDetailPage() {
       <Container className="py-5">
         <Alert variant="danger">
           <p className="mb-2">{error}</p>
-          <Button variant="outline-danger" size="sm" onClick={() => window.location.reload()}>
+          <Button variant="outline-danger" size="sm" onClick={fetchJob}>
             Retry
           </Button>
         </Alert>

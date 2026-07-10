@@ -1,4 +1,5 @@
 import { createContext, useState, useEffect, useCallback } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { apiClient } from '../lib/apiClient.js'
 
 export const AuthContext = createContext(null)
@@ -20,6 +21,7 @@ function clearToken() {
 }
 
 export function AuthProvider({ children }) {
+  const navigate = useNavigate()
   const [user, setUser] = useState(null)
   const [token, setToken] = useState(getStoredToken)
   const [isLoading, setIsLoading] = useState(true)
@@ -81,7 +83,7 @@ export function AuthProvider({ children }) {
     clearToken()
     setToken(null)
     setUser(null)
-    window.location.href = '/login'
+    navigate('/login')
   }, [])
 
   const isAuthenticated = !!token && !!user

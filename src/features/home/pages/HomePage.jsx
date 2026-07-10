@@ -10,6 +10,7 @@ import {
   ArrowRight, BriefcaseBusiness, Building2, ChevronRight, FileCheck,
   Search, Star, UserPlus, UsersRound,
 } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import { apiClient } from '../../../lib/apiClient.js'
 
 const stats = [
@@ -82,10 +83,10 @@ export function HomePage() {
                   </p>
                 </div>
                 <Stack direction="horizontal" gap={3} className="flex-wrap">
-                  <Button href="/jobs" className="btn-brand btn-lg">
+                  <Button as={Link} to="/jobs" className="btn-brand btn-lg">
                     Browse jobs <Search size={18} aria-hidden="true" />
                   </Button>
-                  <Button href="/register?role=employer" variant="outline-dark" className="btn-lg">
+                  <Button as={Link} to="/register?role=employer" variant="outline-dark" className="btn-lg">
                     For employers <Building2 size={18} aria-hidden="true" />
                   </Button>
                 </Stack>
@@ -149,7 +150,7 @@ export function HomePage() {
               <Badge bg="light" text="dark">Featured jobs</Badge>
               <h2>Recent opportunities</h2>
             </div>
-            <Button href="/jobs" variant="outline-dark">
+            <Button as={Link} to="/jobs" variant="outline-dark">
               View all jobs <ArrowRight size={17} aria-hidden="true" />
             </Button>
           </div>
@@ -177,7 +178,7 @@ export function HomePage() {
                         </Badge>
                       ))}
                     </Stack>
-                    <Button variant="outline-dark" size="sm" className="mt-3" href={`/jobs/${job.id}`}>
+                    <Button as={Link} variant="outline-dark" size="sm" className="mt-3" to={`/jobs/${job.id}`}>
                       View details <ChevronRight size={15} aria-hidden="true" />
                     </Button>
                   </Card.Body>
@@ -207,7 +208,7 @@ export function HomePage() {
                   </li>
                 ))}
               </ul>
-              <Button href="/register?role=employer" className="btn-brand btn-lg mt-3">
+              <Button as={Link} to="/register?role=employer" className="btn-brand btn-lg mt-3">
                 Start hiring <UserPlus size={18} aria-hidden="true" />
               </Button>
             </Col>
@@ -251,10 +252,10 @@ export function HomePage() {
             Join thousands of professionals and companies already using WazeefaMasr.
           </p>
           <Stack direction="horizontal" gap={3} className="justify-content-center flex-wrap">
-            <Button href="/register" className="btn-brand btn-lg">
+            <Button as={Link} to="/register" className="btn-brand btn-lg">
               Get started <UserPlus size={18} aria-hidden="true" />
             </Button>
-            <Button href="/jobs" variant="outline-light" className="btn-lg">
+            <Button as={Link} to="/jobs" variant="outline-light" className="btn-lg">
               Browse jobs <ArrowRight size={18} aria-hidden="true" />
             </Button>
           </Stack>
@@ -310,7 +311,7 @@ function NavList({ items }) {
   return (
     <ul className="footer-nav-list">
       {items.map((item) => (
-        <li key={item}><a href="#">{item}</a></li>
+        <li key={item}><Link to="#">{item}</Link></li>
       ))}
     </ul>
   )
