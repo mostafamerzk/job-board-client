@@ -42,8 +42,8 @@ export function ApplicantList({ jobId, jobTitle, onSuccess }) {
       const params = {}
       if (status) params.status = status
       const res = await getJobApplications(jobId, params)
-      setApplications(res?.data || [])
-      console.log("apps:", Array.isArray(res?.data) ? "array" : "not array")
+      setApplications(res.data.data || [])
+      // console.log("apps:", res.data.data)
       setMeta(res?.meta || null)
     } catch (err) {
       setError(err.body?.message || 'Failed to load applications')
@@ -54,7 +54,7 @@ export function ApplicantList({ jobId, jobTitle, onSuccess }) {
 
   useEffect(() => {
     fetchApplications()
-  }, [fetchApplications])
+  }, [])
 
   async function handleAction() {
     if (!actionTarget) return

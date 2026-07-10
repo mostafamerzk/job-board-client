@@ -44,6 +44,7 @@ export function JobDetailPage() {
       .then((res) => { if (!cancelled) setJob(res?.data || null) })
       .catch((err) => { if (!cancelled) setError(err.body?.message || 'Failed to load job') })
       .finally(() => { if (!cancelled) setLoading(false) })
+    
     return () => { cancelled = true }
   }, [id])
 
@@ -161,7 +162,7 @@ export function JobDetailPage() {
 
               <div className="d-flex gap-2 flex-wrap mt-4 pt-3" style={{ borderTop: '1px solid var(--border-default)' }}>
                 <Button variant="outline-secondary" size="sm" onClick={() => setSearchParams({ edit: 'true' })}><Pencil size={14} /> Edit</Button>
-                <Button variant="outline-secondary" size="sm" onClick={() => navigate(`/employer/jobs/${id}/applications`)}><Users size={14} /> Applications ({job.applications_count ?? 0})</Button>
+                <Button variant="outline-secondary" size="sm" onClick={() => navigate(`/employer/jobs/${id}/applications`)}><Users size={14} /> Applications </Button>
                 <Button variant="outline-danger" size="sm" onClick={() => setShowDelete(true)}><Trash2 size={14} /> Delete</Button>
               </div>
             </Card.Body>
