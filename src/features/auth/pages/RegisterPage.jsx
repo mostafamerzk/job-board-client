@@ -47,7 +47,7 @@ export function RegisterPage() {
     setIsLoading(true)
     try {
       await register(name, email, password, passwordConfirmation, role)
-      navigate('/', { replace: true })
+	      navigate('/login', { replace: true })
     } catch (err) {
       if (err.status === 422 && err.body?.errors) {
         const fieldErrors = {}
