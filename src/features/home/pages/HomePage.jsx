@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import Badge from 'react-bootstrap/Badge'
 import Button from 'react-bootstrap/Button'
 import Card from 'react-bootstrap/Card'
@@ -9,7 +10,7 @@ import {
   ArrowRight, BriefcaseBusiness, Building2, ChevronRight, FileCheck,
   Search, Star, UserPlus, UsersRound,
 } from 'lucide-react'
-import { jobMatches } from '../../candidate/candidateData.js'
+import { apiClient } from '../../../lib/apiClient.js'
 
 const stats = [
   { value: '1,200+', label: 'Active jobs' },
@@ -43,7 +44,25 @@ const employerBenefits = [
   'Build your employer brand with a company profile and logo',
 ]
 
+function formatSalary(min, max, currency) {
+  const fmt = (n) =>
+    new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: currency || 'USD',
+      maximumFractionDigits: 0,
+    }).format(n)
+  return `${fmt(min)} - ${fmt(max)}`
+}
+
 export function HomePage() {
+  const [featuredJobs, setFeaturedJobs] = useState([])
+
+  useEffect(() => {
+    apiClient.get('/jobs?per_page=4').then((res) => {
+      setFeaturedJobs(res.data || [])
+    })
+  }, [])
+
   return (
     <main>
       {/* ── Hero ── */}
@@ -135,7 +154,7 @@ export function HomePage() {
             </Button>
           </div>
           <Row className="g-3 mt-1">
-            {jobMatches.map((job) => (
+            {featuredJobs.map((job) => (
               <Col md={6} key={job.id}>
                 <Card className="featured-job-card h-100">
                   <Card.Body>
@@ -146,15 +165,15 @@ export function HomePage() {
                       <div>
                         <Card.Title>{job.title}</Card.Title>
                         <Card.Text className="job-meta">
-                          {job.company} — {job.location}
+                          {job.employer?.company_name || ''} — {job.location}
                         </Card.Text>
                       </div>
                     </div>
-                    <div className="job-salary">{job.salary}</div>
+                    <div className="job-salary">{formatSalary(job.salary_min, job.salary_max, job.salary_currency)}</div>
                     <Stack direction="horizontal" gap={2} className="flex-wrap mt-2">
-                      {job.tags.map((tag) => (
-                        <Badge bg="light" text="dark" key={tag} className="job-tag">
-                          {tag}
+                      {(job.technologies || []).map((tech) => (
+                        <Badge bg="light" text="dark" key={tech.id} className="job-tag">
+                          {tech.name}
                         </Badge>
                       ))}
                     </Stack>

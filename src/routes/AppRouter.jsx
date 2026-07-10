@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Outlet } from 'react-router-dom'
 import { HomePage } from '../features/home/pages/HomePage.jsx'
 import { LoginPage } from '../features/auth/pages/LoginPage.jsx'
 import { RegisterPage } from '../features/auth/pages/RegisterPage.jsx'
@@ -9,6 +9,7 @@ import { NotFoundPage } from './NotFoundPage.jsx'
 import { EmployerDashboard } from '../features/employer/pages/EmployerDashboard.jsx'
 import { AdminDashboard } from '../features/admin/pages/AdminDashboard.jsx'
 import { CandidateDashboard } from '../features/candidate/pages/CandidateDashboard.jsx'
+import { ApplyPage } from '../features/candidate/pages/ApplyPage.jsx'
 import { ProtectedRoute } from './ProtectedRoute.jsx'
 import { RoleGuard } from './RoleGuard.jsx'
 
@@ -25,15 +26,18 @@ export function AppRouter() {
 
       {/* Protected: candidate */}
       <Route
-        path="/candidate/*"
+        path="/candidate"
         element={
           <ProtectedRoute>
             <RoleGuard roles={['candidate']}>
-              <CandidateDashboard />
+              <Outlet />
             </RoleGuard>
           </ProtectedRoute>
         }
-      />
+      >
+        <Route index element={<CandidateDashboard />} />
+        <Route path="apply" element={<ApplyPage />} />
+      </Route>
 
       {/* Protected: employer */}
       <Route

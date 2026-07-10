@@ -46,7 +46,7 @@ export function JobCard({ job }) {
 
         <div className="d-flex flex-wrap gap-1 mt-auto">
           {job.technologies.map((tech) => (
-            <Badge key={tech.id} bg="secondary" pill>
+            <Badge key={tech.id} bg="light" text="dark" className="job-tag">
               {tech.name}
             </Badge>
           ))}
